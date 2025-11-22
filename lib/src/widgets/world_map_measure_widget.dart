@@ -78,7 +78,7 @@ class _WorldMapMeasureWidgetState
     final countryName = getCountryNameByLcCc(widget.languageCode, _countryCode);
     final countryWidgetBuilder = widget.countryWidgetBuilder;
     final flagPath =
-        'packages/anecdotes_impl/assets/flags/${_countryCode.toLowerCase()}.svg';
+        'packages/anecdotes_catalog/assets/flags/${_countryCode.toLowerCase()}.svg';
     return ColoredBox(
       color: Colors.blue[900]!,
       child: Stack(
@@ -152,7 +152,7 @@ Future<(Offset, double, String)> extractWorldMapData(
   String color,
 ) async {
   final value = await extractBoundingBoxesAndViewBoxAndXmlStr(
-    'packages/anecdotes_impl/assets/images/world_map.svg',
+    'packages/anecdotes_catalog/assets/images/world_map.svg',
     countryCode,
     color,
   );
