@@ -54,8 +54,17 @@ class _MainAppState extends State<MainApp> {
               id: 0,
               riveSource: AssetSource('assets/animations/pirates.riv'),
             ),
+            LoopingRiveMeasure(
+              id: 1,
+              riveSource: AssetSource('assets/animations/pirates_meeting.riv'),
+            ),
+            LoopingRiveMeasure(
+              id: 2,
+              riveSource: AssetSource('assets/animations/pirates.riv'),
+            ),
           ],
           musicSource: PlaylistSource([
+            AssetAudioSource('assets/audio/barco_aventura.mp3'),
             AssetAudioSource('assets/audio/barco_aventura.mp3'),
             AssetAudioSource('assets/audio/barco_aventura.mp3'),
           ]),
