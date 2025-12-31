@@ -16,7 +16,7 @@ class LoopingRiveMeasureWidget extends MeasureBaseWidget<LoopingRiveMeasure> {
 
 class _LoopingRiveMeasureWidgetState
     extends MeasureBaseState<MeasureBaseWidget<LoopingRiveMeasure>>
-    with MeasureVoiceCompletedMixin, RiveMeasureMixin {
+    with MeasureMusicCompletedMixin, RiveMeasureMixin {
   final _completer = Completer<void>();
 
   @override
@@ -41,5 +41,10 @@ class _LoopingRiveMeasureWidgetState
         onInit: onSceneInit,
       ),
     );
+  }
+
+  @override
+  void onDurationUpdate(Duration duration) {
+    // TODO: implement onDurationUpdate
   }
 }

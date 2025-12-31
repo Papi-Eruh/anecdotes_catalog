@@ -20,4 +20,7 @@ class LoopingRiveMeasure implements Measure {
 
   @override
   final AudioSource? voiceSource;
+
+  @override
+  MeasureCompletionType get completionType => MeasureCompletionType.music;
 }

@@ -20,4 +20,7 @@ class WorldMapMeasure implements Measure {
   final AudioSource? voiceSource;
 
   final String countryCode;
+
+  @override
+  MeasureCompletionType get completionType => MeasureCompletionType.music;
 }
