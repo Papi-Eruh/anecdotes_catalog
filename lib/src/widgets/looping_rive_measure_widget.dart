@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:anecdotes/anecdotes.dart';
 import 'package:anecdotes_catalog/anecdotes_catalog.dart';
-import 'package:widia/widia.dart';
 import 'package:flutter/material.dart' hide ValueChanged;
+import 'package:widia/widia.dart';
 
 class LoopingRiveMeasureWidget extends MeasureBaseWidget<LoopingRiveMeasure> {
   const LoopingRiveMeasureWidget({required super.measure, super.key});

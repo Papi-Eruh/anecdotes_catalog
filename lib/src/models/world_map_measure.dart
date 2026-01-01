@@ -1,6 +1,4 @@
 import 'package:anecdotes/anecdotes.dart';
-import 'package:heart/heart.dart';
-import 'package:maestro/maestro.dart';
 
 class WorldMapMeasure implements Measure {
   WorldMapMeasure({

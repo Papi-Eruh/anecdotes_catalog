@@ -1,6 +1,4 @@
 import 'package:anecdotes/anecdotes.dart';
-import 'package:heart/heart.dart';
-import 'package:maestro/maestro.dart';
 
 class LoopingRiveMeasure implements Measure {
   const LoopingRiveMeasure({
