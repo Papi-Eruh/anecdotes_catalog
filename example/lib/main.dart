@@ -51,17 +51,14 @@ class _MainAppState extends State<MainApp> {
         anecdote: MyAnecdote(
           measures: [
             LoopingRiveMeasure(
-              id: 0,
               riveSource: AssetSource('assets/animations/pirates.riv'),
               completionType: MeasureCompletionType.music,
             ),
             LoopingRiveMeasure(
-              id: 1,
               riveSource: AssetSource('assets/animations/pirates_meeting.riv'),
               completionType: MeasureCompletionType.music,
             ),
             LoopingRiveMeasure(
-              id: 2,
               riveSource: AssetSource('assets/animations/pirates.riv'),
               completionType: MeasureCompletionType.music,
             ),

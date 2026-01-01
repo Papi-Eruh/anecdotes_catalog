@@ -4,15 +4,11 @@ import 'package:maestro/maestro.dart';
 
 class LoopingRiveMeasure implements Measure {
   const LoopingRiveMeasure({
-    required this.id,
     required this.riveSource,
     required this.completionType,
     this.captionsSource,
     this.voiceSource,
   });
-
-  @override
-  final int id;
 
   final FileSource riveSource;
 

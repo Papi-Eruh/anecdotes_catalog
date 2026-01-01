@@ -4,15 +4,11 @@ import 'package:maestro/maestro.dart';
 
 class WorldMapMeasure implements Measure {
   WorldMapMeasure({
-    required this.id,
     required this.countryCode,
     required this.completionType,
     this.captionsSource,
     this.voiceSource,
   });
-
-  @override
-  final int id;
 
   @override
   final FileSource? captionsSource;
