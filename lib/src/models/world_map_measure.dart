@@ -6,6 +6,7 @@ class WorldMapMeasure implements Measure {
   WorldMapMeasure({
     required this.id,
     required this.countryCode,
+    required this.completionType,
     this.captionsSource,
     this.voiceSource,
   });
@@ -22,5 +23,5 @@ class WorldMapMeasure implements Measure {
   final String countryCode;
 
   @override
-  MeasureCompletionType get completionType => MeasureCompletionType.music;
+  final MeasureCompletionType completionType;
 }

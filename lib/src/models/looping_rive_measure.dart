@@ -6,6 +6,7 @@ class LoopingRiveMeasure implements Measure {
   const LoopingRiveMeasure({
     required this.id,
     required this.riveSource,
+    required this.completionType,
     this.captionsSource,
     this.voiceSource,
   });
@@ -22,5 +23,5 @@ class LoopingRiveMeasure implements Measure {
   final AudioSource? voiceSource;
 
   @override
-  MeasureCompletionType get completionType => MeasureCompletionType.music;
+  final MeasureCompletionType completionType;
 }
