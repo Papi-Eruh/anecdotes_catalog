@@ -1,6 +1,7 @@
 import 'package:anecdotes/anecdotes.dart';
 import 'package:anecdotes_catalog/anecdotes_catalog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:maestro_just_audio/maestro_just_audio.dart';
 
 void main() {
@@ -29,9 +30,22 @@ class _MainAppState extends State<MainApp> {
 
   @override
   void initState() {
-    _registry.register<LoopingRiveMeasure>(
-      (context, measure) => LoopingRiveMeasureWidget(measure: measure),
-    );
+    _registry
+      ..register<LoopingRiveMeasure>(
+        (context, measure) => LoopingRiveMeasureWidget(measure: measure),
+      )
+      ..register<WorldMapMeasure>(
+        (context, measure) => WorldMapMeasureWidget(
+          measure: measure,
+          languageCode: 'en',
+          countryWidgetBuilder: (cc, path) => SafeArea(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: SvgPicture.asset(path, height: 100),
+            ),
+          ),
+        ),
+      );
     super.initState();
   }
 
@@ -52,17 +66,12 @@ class _MainAppState extends State<MainApp> {
               riveSource: AssetSource('assets/animations/pirates.riv'),
               completionType: MeasureCompletionType.music,
             ),
-            LoopingRiveMeasure(
-              riveSource: AssetSource('assets/animations/pirates_meeting.riv'),
-              completionType: MeasureCompletionType.music,
-            ),
-            LoopingRiveMeasure(
-              riveSource: AssetSource('assets/animations/pirates.riv'),
+            WorldMapMeasure(
+              countryCode: 'JM',
               completionType: MeasureCompletionType.music,
             ),
           ],
           musicSource: PlaylistSource([
-            AssetAudioSource('assets/audio/barco_aventura.mp3'),
             AssetAudioSource('assets/audio/barco_aventura.mp3'),
             AssetAudioSource('assets/audio/barco_aventura.mp3'),
           ]),

@@ -13,6 +13,7 @@ dependencies:
     path: ../
   flutter:
     sdk: flutter
+  flutter_svg: ^2.2.3
   maestro_just_audio:
     path: ../../maestro_just_audio/
 
