@@ -13,10 +13,6 @@ dependencies:
     path: ../
   flutter:
     sdk: flutter
-  heart:
-    path: ../../heart/
-  maestro:
-    path: ../../maestro/
   maestro_just_audio:
     path: ../../maestro_just_audio/
 

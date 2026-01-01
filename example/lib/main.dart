@@ -1,8 +1,6 @@
 import 'package:anecdotes/anecdotes.dart';
 import 'package:anecdotes_catalog/anecdotes_catalog.dart';
 import 'package:flutter/material.dart';
-import 'package:heart/heart.dart' show AssetSource;
-import 'package:maestro/maestro.dart';
 import 'package:maestro_just_audio/maestro_just_audio.dart';
 
 void main() {
