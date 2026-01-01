@@ -1,8 +1,9 @@
 import 'package:anecdotes/anecdotes.dart';
-import 'package:widia/widia.dart';
 import 'package:flutter/widgets.dart';
+import 'package:widia/widia.dart';
 
-mixin RiveMeasureMixin<T extends StatefulWidget> on MeasureBaseState<T> {
+mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
+    on MeasureBaseState<M, W> {
   /// Controller of the [SceneWidget]
   late SceneWidgetController controller;
 

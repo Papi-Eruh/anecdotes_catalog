@@ -9,14 +9,19 @@ class LoopingRiveMeasureWidget extends MeasureBaseWidget<LoopingRiveMeasure> {
   const LoopingRiveMeasureWidget({required super.measure, super.key});
 
   @override
-  MeasureBaseState<MeasureBaseWidget<LoopingRiveMeasure>> createState() {
+  MeasureBaseState<LoopingRiveMeasure, MeasureBaseWidget<LoopingRiveMeasure>>
+  createState() {
     return _LoopingRiveMeasureWidgetState();
   }
 }
 
 class _LoopingRiveMeasureWidgetState
-    extends MeasureBaseState<MeasureBaseWidget<LoopingRiveMeasure>>
-    with MeasureMusicCompletedMixin, RiveMeasureMixin {
+    extends
+        MeasureBaseState<
+          LoopingRiveMeasure,
+          MeasureBaseWidget<LoopingRiveMeasure>
+        >
+    with RiveMeasureMixin {
   final _completer = Completer<void>();
 
   @override
@@ -41,10 +46,5 @@ class _LoopingRiveMeasureWidgetState
         onInit: onSceneInit,
       ),
     );
-  }
-
-  @override
-  void onDurationUpdate(Duration duration) {
-    // TODO: implement onDurationUpdate
   }
 }

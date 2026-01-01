@@ -28,14 +28,15 @@ class WorldMapMeasureWidget extends MeasureBaseWidget<WorldMapMeasure> {
   final CountryWidgetBuilder? countryWidgetBuilder;
 
   @override
-  MeasureBaseState<WorldMapMeasureWidget> createState() {
+  MeasureBaseState<WorldMapMeasure, MeasureBaseWidget<WorldMapMeasure>>
+  createState() {
     return _WorldMapMeasureWidgetState();
   }
 }
 
 class _WorldMapMeasureWidgetState
-    extends MeasureBaseState<WorldMapMeasureWidget>
-    with MeasureVoiceCompletedMixin, SingleTickerProviderStateMixin {
+    extends MeasureBaseState<WorldMapMeasure, WorldMapMeasureWidget>
+    with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
     duration: Duration.zero,
@@ -114,6 +115,11 @@ class _WorldMapMeasureWidgetState
   }
 
   @override
+  void onVoiceDurationChanged(Duration duration) {
+    _controller.duration = duration;
+  }
+
+  @override
   Future<void> prepareBeforeReady() async {
     final sizeCompleter = Completer<Size>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -123,7 +129,6 @@ class _WorldMapMeasureWidgetState
       sizeCompleter.complete(size);
     });
     final availableSize = await sizeCompleter.future;
-    _controller.duration = await voiceDurationFuture;
     final (origin, scale, xmlStr) = await extractWorldMapData(
       _countryCode,
       availableSize,
