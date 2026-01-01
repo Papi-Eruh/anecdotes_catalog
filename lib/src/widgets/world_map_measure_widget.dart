@@ -47,7 +47,9 @@ class _WorldMapMeasureWidgetState
   String? _xmlStr;
   double _animState = 0;
 
-  String get _countryCode => widget.measure.countryCode;
+  WorldMapMeasure get _measure => widget.measure;
+
+  String get _countryCode => _measure.countryCode;
 
   @override
   void dispose() {
@@ -116,7 +118,16 @@ class _WorldMapMeasureWidgetState
 
   @override
   void onVoiceDurationChanged(Duration duration) {
-    _controller.duration = duration;
+    if (_measure.completionType == MeasureCompletionType.voice) {
+      _controller.duration = duration;
+    }
+  }
+
+  @override
+  void onMusicDurationChanged(Duration duration) {
+    if (_measure.completionType == MeasureCompletionType.music) {
+      _controller.duration = duration;
+    }
   }
 
   @override
