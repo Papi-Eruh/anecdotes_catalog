@@ -17,8 +17,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.2.1
-  maestro:
-    path: ../maestro
   rive: ^0.14.0-dev.7
   xml: ^6.6.1
 
