@@ -1,67 +1,177 @@
-# Anecdotes catalog 
+# Anecdotes Catalog
 
-[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
-[![License: MIT][license_badge]][license_link]
+> This package is a companion to the [Anecdotes](https://github.com/Papi-Eruh/anecdotes) framework, born out of the development of the [Erudit](https://github.com/Papi-Eruh/erudit_public) application. We decided to make it open source so other developers can benefit from it.
 
-A catalog of models/widgets to populate anecdotes widgets. 
+![Anecdotes](./resources/images/catalog.webp)
 
-## Installation 💻
+## What is Anecdotes Catalog?
 
-**❗ In order to start using Anecdotes Impl you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
+**Anecdotes Catalog** is a collection of pre-built, ready-to-use `Measure` and `MeasureWidget` components for the [Anecdotes](https://github.com/Papi-Eruh/anecdotes) storytelling package. It accelerates development by providing common scene types, allowing you to focus on your narrative.
 
-Install via `flutter pub add`:
+### Key Features:
 
-```sh
-dart pub add catalog
+*   **Ready-to-Use Scenes**: Drop pre-built measures into your anecdotes without writing custom widget code.
+*   **Rive Animations**: Easily integrate and control looping [Rive](https://rive.app/) animations as part of your story with `LoopingRiveMeasure`.
+*   **Interactive World Maps**: Display a world map and highlight specific countries using the `WorldMapMeasure`.
+*   **Extensible**: Use this package as a starting point and contribute your own reusable measures for the community.
+
+### Built with
+
+* [![Flutter][Flutter]][Flutter-url]
+* [![Dart][Dart]][Dart-url]
+
+## Getting started
+
+### Prerequisites
+
+Make sure you have the Flutter SDK (version >=3.35.0) and Dart SDK (version >=3.9.0) installed. You also need to have the base `anecdotes` package in your project.
+
+### Installation
+
+To use this package, add it as a git dependency in your `pubspec.yaml` file along with `anecdotes`. 
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  anecdotes:
+    git:
+      url: https://github.com/Papi-Eruh/anecdotes.git
+  anecdotes_catalog:
+    git:
+      url: https://github.com/Papi-Eruh/anecdotes_catalog.git
 ```
 
----
+Then, run `flutter pub get` in your project's root directory.
 
-## Continuous Integration 🤖
+## Usage
 
-Anecdotes Impl comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+Using the catalog is straightforward. Once you have your `Anecdote` set up, you can use the measures from this package just like any other `Measure`. The key is to register the corresponding widgets from the catalog with your `MeasureBuilderRegistry`.
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+> A complete, ready-to-test version of this example is available in the `/example` directory of this project.
 
----
+<br>
 
-## Running Tests 🧪
+### 1. Register the Catalog Widgets
 
-For first time users, install the [very_good_cli][very_good_cli_link]:
+In your app's initialization, get an instance of `MeasureBuilderRegistry` and register the widgets you want to use from the catalog.
 
-```sh
-dart pub global activate very_good_cli
+```dart
+import 'package:anecdotes_catalog/anecdotes_catalog.dart';
+import 'package:flutter/material.dart';
+
+// ...
+
+final _registry = MeasureBuilderRegistry();
+
+@override
+void initState() {
+  _registry
+    ..register<LoopingRiveMeasure>(
+      (context, measure) => LoopingRiveMeasureWidget(measure: measure),
+    )
+    ..register<WorldMapMeasure>(
+      (context, measure) => WorldMapMeasureWidget(
+        measure: measure,
+        languageCode: 'en', // Customize the map language
+        countryWidgetBuilder: (cc, path) => SafeArea(
+          child: Align(
+            alignment: Alignment.topCenter,
+            // Example of a custom widget to display on top of the map
+            child: SvgPicture.asset(path, height: 100),
+          ),
+        ),
+      ),
+    );
+  super.initState();
+}
 ```
 
-To run all unit tests:
+### 2. Use the Measures in an Anecdote
 
-```sh
-very_good test --coverage
+Now you can compose your `Anecdote` using the measures you just registered. Here, we create a story that first shows a Rive animation and then highlights Jamaica on a world map.
+
+```dart
+import 'package:anecdotes/anecdotes.dart';
+import 'package:anecdotes_catalog/anecdotes_catalog.dart';
+import 'package:maestro_just_audio/maestro_just_audio.dart';
+
+
+// Define an anecdote that uses the catalog measures
+final anecdote = MyAnecdote(
+  measures: [
+    LoopingRiveMeasure(
+      riveSource: AssetSource('assets/animations/pirates.riv'),
+      completionType: MeasureCompletionType.music,
+    ),
+    WorldMapMeasure(
+      countryCode: 'JM',
+      completionType: MeasureCompletionType.music,
+    ),
+  ],
+  musicSource: PlaylistSource([
+    AssetAudioSource('assets/audio/barco_aventura.mp3'),
+    AssetAudioSource('assets/audio/barco_aventura.mp3'),
+  ]),
+);
+
+// ...
+
+// Pass the registry to the AnecdoteWidget
+MaterialApp(
+  home: AnecdoteWidget(
+    anecdote: anecdote,
+    measureBuilderRegistry: _registry,
+    // ... other players and builders
+  ),
+);
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+And that's it! The `AnecdoteWidget` will now know how to render `LoopingRiveMeasure` and `WorldMapMeasure` when it encounters them in your story.
 
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
+## Available Measures
 
-# Open Coverage Report
-open coverage/index.html
-```
+This catalog currently includes:
 
-[flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
-[mason_link]: https://github.com/felangel/mason
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
+-   **`LoopingRiveMeasure`**: Plays a Rive animation from a specified source (`riveSource`). The animation loops continuously until the measure is completed.
+-   **`WorldMapMeasure`**: Displays a world map and visually highlights a country specified by its `countryCode`. It's highly customizable, allowing you to overlay custom widgets.
+
+## Contributing
+
+This catalog is just getting started, and we welcome contributions! If you have built a reusable `Measure` and `MeasureWidget` that could benefit the community, we encourage you to add it to the catalog.
+
+### How to Contribute:
+
+1.  **Fork the repository** on GitHub.
+2.  **Create a new `Measure`**: Define your measure's data in `lib/src/models`. Follow the example of `LoopingRiveMeasure`.
+3.  **Create the `MeasureWidget`**: Build the corresponding widget in `lib/src/widgets`. It must extend `MeasureBaseWidget` and `MeasureBaseState`. See the `anecdotes` package [README](https://github.com/Papi-Eruh/anecdotes#creating-a-custom-measure-widget) for a detailed guide.
+4.  **Add an example**: Update the `example` app to showcase your new measure.
+5.  **Submit a Pull Request**: We'll review your contribution and merge it.
+
+By adding to the catalog, you help other developers tell amazing stories more easily.
+
+### Top contributors:
+
+<a href="https://github.com/Papi-Eruh/anecdotes_catalog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Papi-Eruh/anecdotes_catalog" alt="contrib.rocks image" />
+</a>
+
+## License
+
+Distributed under the MIT License. See `./LICENSE` for more information.
+
+## Contact
+
+<contact@erudit.app>  
+Project link: <https://erudit.app>
+
+## Acknowledgments
+
+* https://github.com/Papi-Eruh/anecdotes
+* https://github.com/othneildrew/Best-README-Template
+* https://cli.vgv.dev/
+
+
+[Dart]: https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white
+[Dart-url]: https://dart.dev/
+[Flutter]: https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white
+[Flutter-url]: https://flutter.dev/
