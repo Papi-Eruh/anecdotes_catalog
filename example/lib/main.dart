@@ -72,8 +72,8 @@ class _MainAppState extends State<MainApp> {
             ),
           ],
           musicSource: PlaylistSource([
-            AssetAudioSource('assets/audio/barco_aventura.mp3'),
-            AssetAudioSource('assets/audio/barco_aventura.mp3'),
+            AssetAudioSource('assets/audio/pirate_1.mp3'),
+            AssetAudioSource('assets/audio/pirate_2.mp3'),
           ]),
         ),
         measureBuilderRegistry: _registry,
