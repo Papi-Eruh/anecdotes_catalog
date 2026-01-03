@@ -1,7 +1,6 @@
 import 'package:anecdotes/anecdotes.dart';
 import 'package:anecdotes_catalog/anecdotes_catalog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:maestro_just_audio/maestro_just_audio.dart';
 
 void main() {

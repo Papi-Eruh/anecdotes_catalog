@@ -39,6 +39,10 @@ dependencies:
   anecdotes_catalog:
     git:
       url: https://github.com/Papi-Eruh/anecdotes_catalog.git
+  # If you want to use audio, add dependencies to maestro_just_audio
+  # maestro_just_audio:
+  #   git:
+  #     url: https://github.com/Papi-Eruh/maestro_just_audio.git
 ```
 
 Then, run `flutter pub get` in your project's root directory.
