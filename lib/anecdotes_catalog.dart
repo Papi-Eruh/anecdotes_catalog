@@ -1,4 +1,7 @@
-/// A Very Good Project created by Very Good CLI.
+/// A catalog of measures for anecdotes.
+///
+/// This library provides a set of widgets and models for displaying
+/// different kinds of measures, such as Rive animations and world maps.
 library;
 
 export 'src/models/models.dart';

@@ -1,4 +1,9 @@
-/// Get country name by language code & country code
+/// Returns the country name for a given language and country code.
+///
+/// The [lc] is the language code (e.g., 'en', 'fr').
+/// The [cc] is the country code (e.g., 'US', 'FR').
+///
+/// If the language code is not supported, it defaults to English.
 String getCountryNameByLcCc(String lc, String cc) {
   if (lc == 'fr') {
     return _countryNameByIdFr[cc]!;

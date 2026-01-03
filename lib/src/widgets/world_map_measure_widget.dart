@@ -10,7 +10,14 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xml/xml.dart';
 
+/// A widget that displays a [WorldMapMeasure].
+///
+/// This widget highlights a specific country on a world map and can
+/// display a custom widget for that country.
 class WorldMapMeasureWidget extends MeasureBaseWidget<WorldMapMeasure> {
+  /// Creates a new instance of [WorldMapMeasureWidget].
+  ///
+  /// The [measure] and [languageCode] are required.
   const WorldMapMeasureWidget({
     required super.measure,
     required this.languageCode,
@@ -18,6 +25,7 @@ class WorldMapMeasureWidget extends MeasureBaseWidget<WorldMapMeasure> {
     super.key,
   });
 
+  /// The ISO 639-1 code of the language to use for the country name.
   final String languageCode;
 
   /// Optional function that allows customizing how a country is displayed.
@@ -158,9 +166,17 @@ class _WorldMapMeasureWidgetState
 /// - [flagPath]: The path to the country's flag SVG asset.
 ///   Should be used directly with `SvgPicture.asset(flagPath)`.
 typedef CountryWidgetBuilder =
-    Widget Function(String countryName, String flagPath);
+    Widget Function(
+      String countryName,
+      String flagPath,
+    );
 
-/// (Origin, scale, strXml of world map)
+/// Extracts world map data for a specific country.
+///
+/// Returns the origin offset, scale, and XML string of the world map SVG.
+/// The [countryCode] is the ISO 3166-1 alpha-2 code of the country.
+/// The [screenSize] is the size of the widget displaying the map.
+/// The [color] is the color used to highlight the country.
 Future<(Offset, double, String)> extractWorldMapData(
   String countryCode,
   Size screenSize,
@@ -197,12 +213,14 @@ Future<(Offset, double, String)> extractWorldMapData(
         (screenSize.height - viewBoxHeight * scale) / 2,
   );
   double? nextScale;
-  //todo remove one day
+  // TODO(alexis): remove one day
   if (countryCode == 'JM') nextScale = 30;
   nextScale ??= calculateScaleToFit(viewBox, countryBox);
   return (origin, nextScale, value.$3);
 }
 
+/// Calculates the scale needed to fit a country's bounding box within the
+/// viewbox.
 double calculateScaleToFit(Rect viewBox, Rect country) {
   final scale = min(
     viewBox.width / country.width,
@@ -211,6 +229,11 @@ double calculateScaleToFit(Rect viewBox, Rect country) {
   return scale * 0.8;
 }
 
+/// Extracts bounding boxes, viewbox, and XML string from an SVG file.
+///
+/// The [svgPath] is the path to the SVG asset. The [countryCode] is the ISO
+/// 3166-1 alpha-2 code of the country to highlight. The [color] is the color
+/// used to highlight the country.
 Future<(Map<String, Rect>, Rect, String)>
 extractBoundingBoxesAndViewBoxAndXmlStr(
   String svgPath,
@@ -239,6 +262,9 @@ extractBoundingBoxesAndViewBoxAndXmlStr(
   return (countryBoundingBoxes, viewBox, document.toXmlString());
 }
 
+/// Extracts the viewBox attribute from an SVG document.
+///
+/// Throws an exception if the viewBox is not found or is invalid.
 Rect extractViewBox(XmlDocument document) {
   final viewBoxAttr = document.rootElement.getAttribute('viewBox');
   if (viewBoxAttr == null) {
@@ -253,6 +279,10 @@ Rect extractViewBox(XmlDocument document) {
   return Rect.fromLTWH(parts[0], parts[1], parts[2], parts[3]);
 }
 
+/// Calculates the bounding box of an SVG path data string.
+///
+/// Returns a [Rect] representing the bounding box, or null if it cannot be
+/// determined.
 Rect? calculateBoundingBox(String d) {
   final regex = RegExp(r'([MLCQTZmlcqtz])|([-+]?\d*\.?\d+)');
   final matches = regex.allMatches(d);

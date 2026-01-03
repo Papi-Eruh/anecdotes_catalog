@@ -29,7 +29,14 @@ class _FileLoaderFileSourceVisitor implements FileSourceVisitor<Future<File?>> {
   }
 }
 
+/// A widget that displays a [LoopingRiveMeasure].
+///
+/// This widget is responsible for loading and displaying a Rive animation
+/// from the provided [LoopingRiveMeasure].
 class LoopingRiveMeasureWidget extends MeasureBaseWidget<LoopingRiveMeasure> {
+  /// Creates a new instance of [LoopingRiveMeasureWidget].
+  ///
+  /// The [measure] is required and contains the data for the Rive animation.
   const LoopingRiveMeasureWidget({required super.measure, super.key});
 
   @override
