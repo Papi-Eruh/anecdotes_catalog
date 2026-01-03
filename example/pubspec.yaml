@@ -8,14 +8,16 @@ environment:
 
 dependencies:
   anecdotes:
-    path: ../../anecdotes/
+    git:
+      url: https://github.com/Papi-Eruh/anecdotes.git
   anecdotes_catalog:
     path: ../
   flutter:
     sdk: flutter
   flutter_svg: ^2.2.3
   maestro_just_audio:
-    path: ../../maestro_just_audio/
+    git: 
+      url: https://github.com/Papi-Eruh/maestro_just_audio.git
 
 dev_dependencies:
   flutter_test:

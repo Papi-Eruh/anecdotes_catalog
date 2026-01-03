@@ -1,11 +1,10 @@
 import 'package:anecdotes/anecdotes.dart';
 import 'package:flutter/widgets.dart';
-import 'package:widia/widia.dart';
+import 'package:rive/rive.dart';
 
 mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
     on MeasureBaseState<M, W> {
-  /// Controller of the [SceneWidget]
-  late SceneWidgetController controller;
+  late RiveWidgetController controller;
 
   /// If true, the scene is already animated before being visible.
   bool get isInitActive => false;
@@ -22,9 +21,8 @@ mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
     controller.active = true;
   }
 
-  /// To call in [SceneWidget.onInit]
   @mustCallSuper
-  void onSceneInit(SceneWidgetController controller) {
+  void onSceneInit(RiveWidgetController controller) {
     this.controller = controller..active = isInitActive;
   }
 }

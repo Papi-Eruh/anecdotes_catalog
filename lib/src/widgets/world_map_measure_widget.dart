@@ -4,10 +4,10 @@ import 'dart:ui';
 
 import 'package:anecdotes/anecdotes.dart';
 import 'package:anecdotes_catalog/anecdotes_catalog.dart';
+import 'package:anecdotes_catalog/src/internals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:heart/heart.dart';
 import 'package:xml/xml.dart';
 
 class WorldMapMeasureWidget extends MeasureBaseWidget<WorldMapMeasure> {
