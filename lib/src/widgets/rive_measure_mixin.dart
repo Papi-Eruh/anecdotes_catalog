@@ -57,6 +57,7 @@ mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
       _FileLoaderFileSourceVisitor(),
     ))!;
     controller = RiveWidgetController(_file)..active = isInitActive;
+    onControllerReady(controller);
     _readyCompleter.complete();
   }
 
@@ -99,6 +100,9 @@ mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
     controller.dispose();
     super.dispose();
   }
+
+  /// Callback when [RiveWidgetController] is ready.
+  void onControllerReady(RiveWidgetController controller);
 }
 
 class _FileLoaderFileSourceVisitor implements FileSourceVisitor<Future<File?>> {

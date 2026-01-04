@@ -7,7 +7,6 @@ import 'package:anecdotes_catalog/anecdotes_catalog.dart';
 import 'package:anecdotes_catalog/src/internals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xml/xml.dart';
 
 /// A widget that displays a [WorldMapMeasure].

@@ -41,4 +41,7 @@ class _LoopingRiveMeasureWidgetState
 
   @override
   FileSource get riveFileSource => widget.measure.riveSource;
+
+  @override
+  void onControllerReady(RiveWidgetController controller) {}
 }
