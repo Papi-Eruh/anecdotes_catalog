@@ -219,8 +219,16 @@ Future<(Offset, double, String)> extractWorldMapData(
   return (origin, nextScale, value.$3);
 }
 
-/// Calculates the scale needed to fit a country's bounding box within the
-/// viewbox.
+/// Calculates the scale required to fit the bounding box of a [country]
+/// within the provided [viewBox].
+///
+/// The function determines the scale by comparing the width and height of the
+/// [country]'s bounding box to the dimensions of the [viewBox]. It then
+/// returns the smaller of the two scaling factors, ensuring that the country
+/// fits entirely within the viewable area.
+///
+/// A padding of 0.8 is applied to the final scale to provide some spacing
+/// around the country.
 double calculateScaleToFit(Rect viewBox, Rect country) {
   final scale = min(
     viewBox.width / country.width,

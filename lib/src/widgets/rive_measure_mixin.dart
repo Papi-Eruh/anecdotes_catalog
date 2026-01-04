@@ -18,6 +18,9 @@ mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
 
   final _readyCompleter = Completer<void>();
 
+  /// The source of the Rive file.
+  ///
+  /// This getter should be implemented by the class using this mixin.
   FileSource get riveFileSource;
 
   /// If true, the scene is already animated before being visible.
@@ -62,11 +65,18 @@ mixin RiveMeasureMixin<M extends Measure, W extends MeasureBaseWidget<M>>
     return _readyCompleter.future;
   }
 
+  /// Builds the content of the widget.
+  ///
+  /// This method is called when the Rive animation is ready to be displayed.
+  /// The [controller] can be used to control the animation.
   Widget buildContent(
     BuildContext context,
     RiveWidgetController controller,
   );
 
+  /// Builds the loading widget.
+  ///
+  /// This method is called while the Rive animation is loading.
   Widget buildLoading(BuildContext context);
 
   @override
