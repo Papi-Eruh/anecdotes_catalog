@@ -8,8 +8,7 @@ environment:
 
 dependencies:
   anecdotes:
-    git:
-      url: https://github.com/Papi-Eruh/anecdotes.git
+    path: ../../anecdotes_flutter/
   anecdotes_catalog:
     path: ../
   flutter:
